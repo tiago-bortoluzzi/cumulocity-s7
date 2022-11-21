@@ -1,0 +1,63 @@
+<div class="split-view--7-5">
+  
+  <div class="card">
+    <div class="card-header separator">
+      <h4 class="card-title" translate>Registered devices</h4>
+    </div>
+    <div class="card-block">
+      <div class="card-inner-scroll" style="max-height: 500px">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th translate>Name</th>
+              <th translate>IP address</th>
+              <th translate>Data reading period (seconds)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let serverSettings of serversSettings">
+              <td>{{serverSettings.name}}</td>
+              <td>{{serverSettings.ip}}</td>
+              <td>{{serverSettings.dataReadPeriod}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer separator sticky-bottom"></div>
+  </div>
+
+  <div class="card m-l-24">
+    <div class="card-header separator">
+      <h4 class="card-title" translate>Register new device</h4>
+    </div>
+    <form>
+      <div class="card-block">
+        <div class="tight-grid">
+          <div class="form-group">
+            <label for="min" translate>Name</label>
+            <div class="input-group">
+              <input type="text" class="form-control m-r-4" [(value)]="newServerSettings.name" (change)="updateNewServerSettings($event, 'name')" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="min" translate>IP address</label>
+            <div class="input-group">
+              <input class="form-control m-r-4" type="text" minlength="7" maxlength="15" size="15" [(value)]="newServerSettings.ip" (change)="updateNewServerSettings($event, 'ip')">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="min" translate>Data reading period (seconds)</label>
+            <div class="input-group">
+              <input name="readPeriod" class="form-control m-r-4" type="number" min="1" step="1" [(value)]="newServerSettings.dataReadPeriod" (change)="updateNewServerSettings($event, 'dataReadPeriod')" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer separator">
+        <button [disabled]="isDisabled" type="button" class="btn btn-primary" (click)="saveNewServerSettings()" translate>Save</button>
+      </div>
+    </form>
+  </div>
+
+</div>

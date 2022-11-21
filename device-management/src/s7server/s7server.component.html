@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-header separator">
+    <h4 class="card-title" translate>Registered tags</h4>
+  </div>
+  <div class="card-block">
+    <div class="card-inner-scroll" style="max-height: 500px">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th translate>Tag</th>
+            <th translate>Type</th>
+            <th translate>DB</th>
+            <th translate>Offset (bytes)</th>
+            <th translate>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tag of tags">
+            <td><button class="btn btn-danger btn-sm btn-block" (click)='removeTag(tag.id)'>x</button></td>
+            <td><input class="form-control" type="text" [(value)]="tag.name" (change)='updateTag(tag.id, "name", $event)' /></td>
+            <td>
+              <div class="c8y-select-wrapper">
+                <select class="form-control" [(value)]="tag.type" (change)='updateTag(tag.id, "type", $event)'>
+                  <option>BOOL</option>
+                  <option>BYTE</option>
+                  <option>WORD</option>
+                  <option>DWORD</option>
+                  <option>CHAR</option>
+                  <option>INT</option>
+                  <option>DINT</option>
+                  <option>REAL</option>
+                </select>
+              </div>
+            </td>
+            <td><input class="form-control" type="number" step="1" [(value)]="tag.db" (change)='updateTag(tag.id, "db", $event)' /></td>
+            <td><input class="form-control" type="number" step="1" [(value)]="tag.offset" (change)='updateTag(tag.id, "offset", $event)' /></td>
+            <td><input class="form-control" type="text" [(value)]="tag.unit" (change)='updateTag(tag.id, "unit", $event)' /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer separator sticky-bottom">
+    <div class="btn-group" role="group">
+      <button class="btn btn-default btn btn-block" (click)='addTag()' translate>Add tag</button>
+      <button class="btn btn-primary btn btn-block btn-custom"(click)='saveTags()' translate>Save</button>
+    </div>
+  </div>
+</div>
